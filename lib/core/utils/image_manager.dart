@@ -20,6 +20,7 @@ class ImageManager {
 
 
   // images
+  static const String logo = '${imagesPath}logo-devoteam.svg';
   static const String blood = '${imagesPath}blood.svg';
   static const String heart = '${imagesPath}heart.svg';
   static const String noise = '${imagesPath}noise.svg';
