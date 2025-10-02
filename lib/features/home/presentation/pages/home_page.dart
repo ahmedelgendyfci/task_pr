@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:task_pr/features/home/presentation/widgets/home_clipper_widget.dart';
+import '../../../../core/utils/color_manager.dart';
 import '../cubit/home_cubit.dart';
 import '../cubit/home_state.dart';
 import '../widgets/user_profile_section.dart';
@@ -35,7 +37,7 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Color(0xFFF7F7F7),
+      backgroundColor: ColorManager.background,
       body: SafeArea(
         child: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {
@@ -43,22 +45,22 @@ class _HomePageState extends State<HomePage> {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message),
-                  backgroundColor: Colors.red,
+                  backgroundColor: ColorManager.error,
                 ),
               );
             } else if (state is HomeSOSTriggered) {
               ScaffoldMessenger.of(context).showSnackBar(
                 SnackBar(
                   content: Text(state.message),
-                  backgroundColor: Colors.green,
+                  backgroundColor: ColorManager.success,
                 ),
               );
             }
           },
           builder: (context, state) {
             if (state is HomeLoading && state is! HomeLoaded) {
-              return const Center(
-                child: CircularProgressIndicator(color: Colors.amber),
+              return Center(
+                child: CircularProgressIndicator(color: ColorManager.primary),
               );
             }
 
@@ -66,8 +68,8 @@ class _HomePageState extends State<HomePage> {
             if (state is HomeLoaded) {
               return RefreshIndicator(
                 onRefresh: () => context.read<HomeCubit>().refreshData(),
-                color: Colors.amber,
-                backgroundColor: Colors.white,
+                color: ColorManager.primary,
+                backgroundColor: ColorManager.surface,
                 child: SingleChildScrollView(
                   physics: const AlwaysScrollableScrollPhysics(),
                   child: Column(
@@ -83,16 +85,10 @@ class _HomePageState extends State<HomePage> {
                                   child: Container(
                                     // height: 350,
                                     decoration: BoxDecoration(
-                                      gradient: LinearGradient(
+                                      gradient: ColorManager.createGradient(
+                                        ColorManager.primaryGradient2,
                                         begin: Alignment.centerLeft,
                                         end: Alignment.centerRight,
-                                        colors: [
-                                          Color(0xFFf8cc05),
-                                          Color(0xFFf8cc05),
-                                          Color(0xFFf8cc05),
-                                          Color.fromARGB(255, 255, 223, 64),
-                                          Color(0xFFf8cc05),
-                                        ],
                                       ),
                                     ),
 
@@ -100,18 +96,15 @@ class _HomePageState extends State<HomePage> {
                                 ),
                               ),
                               Padding(
-                                padding: const EdgeInsets.only(bottom: 20.0),
+                                padding: EdgeInsets.only(bottom: 20.h),
                                 child: ClipPath(
                                   clipper: HomeClipperWidget(),
                                   child: Container(
                                     decoration: BoxDecoration(
-                                      gradient: LinearGradient(
+                                      gradient: ColorManager.createGradient(
+                                        ColorManager.primaryGradient,
                                         begin: Alignment.topCenter,
                                         end: Alignment.bottomCenter,
-                                        colors: [
-                                          Color(0xFFf8cc05),
-                                          Color(0xFFfbe57d),
-                                        ],
                                       ),
                                     ),
                                     child: Column(
@@ -130,7 +123,7 @@ class _HomePageState extends State<HomePage> {
                                           lastUpdated:
                                               state.wellnessData.lastUpdated,
                                         ),
-                                        SizedBox(height: 20),
+                                        SizedBox(height: 20.h),
                                       ],
                                     ),
                                   ),
@@ -155,12 +148,12 @@ class _HomePageState extends State<HomePage> {
               );
             }
 
-            return const Center(
+            return Center(
               child: Text(
                 'Welcome to Wellness Overview',
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 18,
+                  color: ColorManager.textPrimary,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),

@@ -45,6 +45,7 @@ dependencies:
   json_annotation: ^4.9.0
   flutter_svg: ^2.2.1
   sliding_action_button: ^0.0.8
+  flutter_screenutil: ^5.9.3
 
 dev_dependencies:
   flutter_test:

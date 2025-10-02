@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:task_pr/core/utils/image_manager.dart';
+import 'package:task_pr/core/utils/color_manager.dart';
 
 /// Widget that displays the wellness percentage with circular progress indicator
 class WellnessPercentageSection extends StatelessWidget {
@@ -18,7 +20,7 @@ class WellnessPercentageSection extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(left: 20, right: 0, top: 0, bottom: 20),
+      padding: EdgeInsets.only(left: 20.w, right: 0, top: 0, bottom: 20.h),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
@@ -26,55 +28,55 @@ class WellnessPercentageSection extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               // Wellness Overview Title
-              const Text(
+              Text(
                 'Wellness Overview',
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 20,
+                  color: ColorManager.textPrimary,
+                  fontSize: 18.sp,
                   fontWeight: FontWeight.bold,
                 ),
               ),
               
-              const SizedBox(height: 8),
+              SizedBox(height: 6.h),
               
               // Subtitle
-              const Text(
+              Text(
                 "Based on today's readings",
                 style: TextStyle(
-                  color: Colors.black,
-                  fontSize: 13,
+                  color: ColorManager.textPrimary,
+                  fontSize: 12.sp,
                   fontWeight: FontWeight.w400,
                 ),
               ),
               
-              const SizedBox(height: 20),
+              SizedBox(height: 20.h),
               Row(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
                         Row(
                           children: [
                             SvgPicture.asset(ImageManager.date),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8.w),
                             Text(
                               _formatDate(DateTime.now()),
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
+                              style: TextStyle(
+                                color: ColorManager.textPrimary,
+                                fontSize: 10.sp,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
                           ],
                         ),
-                        const SizedBox(width: 20),
+                        SizedBox(width: 20.w),
                         Row(
                           children: [
                             SvgPicture.asset(ImageManager.clock),
-                            const SizedBox(width: 8),
+                            SizedBox(width: 8.w),
                             Text(
                               _formatTime(DateTime.now()),
-                              style: const TextStyle(
-                                color: Colors.black,
-                                fontSize: 12,
+                              style: TextStyle(
+                                color: ColorManager.textPrimary,
+                                fontSize: 10.sp,
                                 fontWeight: FontWeight.w400,
                               ),
                             ),
@@ -88,15 +90,15 @@ class WellnessPercentageSection extends StatelessWidget {
           ),
         
               SizedBox(
-                width: 180,
-                height: 180,
+                width: 150.w,
+                height: 150.w,
                 child: Stack(
                   alignment: Alignment.center,
                   children: [
                     // Background circle
                     Container(
-                      width: 140,
-                      height: 140,
+                      width: 110.w,
+                      height: 110.w,
                       decoration: BoxDecoration(
                         shape: BoxShape.circle,
                         // color: Colors.white,
@@ -105,14 +107,14 @@ class WellnessPercentageSection extends StatelessWidget {
                     
                     // Progress circle
                     SizedBox(
-                      width: 140,
-                      height: 140,
+                      width: 110.w,
+                      height: 110.w,
                       child: CircularProgressIndicator(
                         value: percentage / 100,
-                        strokeWidth: 18,
-                        backgroundColor: const Color(0xFFF5F5F5),
-                        valueColor: const AlwaysStoppedAnimation<Color>(
-                          Color(0xFF4CAF50), // Green color
+                        strokeWidth: 18.w,
+                        backgroundColor: ColorManager.backgroundSecondary,
+                        valueColor: AlwaysStoppedAnimation<Color>(
+                          ColorManager.success,
                         ),
                       ),
                     ),
@@ -124,19 +126,19 @@ class WellnessPercentageSection extends StatelessWidget {
                       children: [
                         Text(
                           '${percentage.toInt()}',
-                          style: const TextStyle(
-                            color: Color(0xFF4CAF50),
-                            fontSize: 30,
+                          style: TextStyle(
+                            color: ColorManager.success,
+                            fontSize: 30.sp,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
                         Padding(
-                          padding: const EdgeInsets.only(bottom: 3),
+                          padding: EdgeInsets.only(bottom: 3.h),
                           child: Text(
                             '%',
-                            style: const TextStyle(
-                              color: Color(0xFF4CAF50),
-                              fontSize: 16,
+                            style: TextStyle(
+                              color: ColorManager.success,
+                              fontSize: 16.sp,
                               fontWeight: FontWeight.bold,
                             ),
                           ),

@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:sliding_action_button/sliding_action_button.dart';
+import '../../../../core/utils/color_manager.dart';
 
 /// Widget that displays the SOS emergency button
 class SOSButtonSection extends StatefulWidget {
@@ -20,25 +22,26 @@ class _SOSButtonSectionState extends State<SOSButtonSection>{
   Widget build(BuildContext context) {
 
     return CircleSlideToActionButton(
-      width: MediaQuery.of(context).size.width - 32,
-      parentBoxRadiusValue: 27,
-      circleSlidingButtonSize: 47,
-      leftEdgeSpacing: 3,
-      rightEdgeSpacing: 3,
+      width: MediaQuery.of(context).size.width - 32.w,
+      height: 60.h,
+      parentBoxRadiusValue: 100.r,
+      circleSlidingButtonSize: 45.w,
+      leftEdgeSpacing: 3.w,
+      rightEdgeSpacing: 3.w,
       initialSlidingActionLabel: 'Slide For SOS',
       finalSlidingActionLabel: 'SOS',
-      circleSlidingButtonIcon: const Icon(Icons.sos, color: Colors.white),
-      parentBoxBackgroundColor: Color(0xffF27373).withOpacity(0.5),
-      parentBoxDisableBackgroundColor: Color(0xffF27373).withOpacity(0.5),
-      circleSlidingButtonBackgroundColor: Color(0xffF27373),
+      circleSlidingButtonIcon: Icon(Icons.sos, color: ColorManager.textOnDark),
+      parentBoxBackgroundColor: ColorManager.withOpacity(ColorManager.sosPrimary, 0.5),
+      parentBoxDisableBackgroundColor: ColorManager.withOpacity(ColorManager.sosPrimary, 0.5),
+      circleSlidingButtonBackgroundColor: ColorManager.sosPrimary,
       isEnable: true,
       onSlideActionCompleted: () {
         // print("Sliding action completed");
-        widget.onSOSTriggered(true);
+        // widget.onSOSTriggered(true);
       },
       onSlideActionCanceled: () {
         // print("Sliding action cancelled");
-        widget.onSOSTriggered(false);
+        // widget.onSOSTriggered(false);
       },
     );
   }

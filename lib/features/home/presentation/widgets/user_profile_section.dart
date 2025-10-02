@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import '../../../../core/utils/image_manager.dart';
+import '../../../../core/utils/color_manager.dart';
 import '../../domain/entities/user_profile.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -18,19 +20,19 @@ class UserProfileSection extends StatelessWidget {
       children: [
         // Top section with user profile and action icons
         Padding(
-          padding: const EdgeInsets.all(20),
+          padding: EdgeInsets.all(20.w),
           child: Row(
             children: [
               // Avatar
               Container(
-                width: 50,
-                height: 50,
+                width: 50.w,
+                height: 50.h,
                 decoration: BoxDecoration(
                   shape: BoxShape.circle,
-                  color: Colors.white,
+                  color: ColorManager.surface,
                   border: Border.all(
-                    color: Colors.grey.shade300,
-                    width: 2,
+                    color: ColorManager.border,
+                    width: 2.w,
                   ),
                 ),
                 child: userProfile.avatarUrl != null
@@ -38,40 +40,40 @@ class UserProfileSection extends StatelessWidget {
                         child: Image.network(
                           userProfile.avatarUrl!,
                           fit: BoxFit.cover,
-                          errorBuilder: (context, error, stackTrace) => const Icon(
+                          errorBuilder: (context, error, stackTrace) => Icon(
                             Icons.person,
-                            color: Colors.grey,
-                            size: 25,
+                            color: ColorManager.textSecondary,
+                            size: 25.sp,
                           ),
                         ),
                       )
-                    : const Icon(
+                    : Icon(
                         Icons.person,
-                        color: Colors.grey,
-                        size: 25,
+                        color: ColorManager.textSecondary,
+                        size: 25.sp,
                       ),
               ),
               
-              const SizedBox(width: 12),
+              SizedBox(width: 12.w),
               
               // User Info
               Expanded(
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const Text(
+                    Text(
                       'Hello,',
                       style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 12,
+                        color: ColorManager.textPrimary,
+                        fontSize: 12.sp,
                         fontWeight: FontWeight.w400,
                       ),
                     ),
                     Text(
                       userProfile.name,
-                      style: const TextStyle(
-                        color: Colors.black,
-                        fontSize: 18,
+                      style: TextStyle(
+                        color: ColorManager.textPrimary,
+                        fontSize: 16.sp,
                         fontWeight: FontWeight.bold,
                       ),
                     ),
@@ -82,13 +84,13 @@ class UserProfileSection extends StatelessWidget {
               // Action Icons
               Row(
                 children: [
-                  SvgPicture.asset(ImageManager.notification,width: 25,height: 25,),
-                  const SizedBox(width: 15),
+                  SvgPicture.asset(ImageManager.notification, width: 25.w, height: 25.h),
+                  SizedBox(width: 15.w),
                   
-                  SvgPicture.asset(ImageManager.settings,width: 25,height: 25,),
-                  const SizedBox(width: 15),
+                  SvgPicture.asset(ImageManager.settings, width: 25.w, height: 25.h),
+                  SizedBox(width: 15.w),
                   
-                  SvgPicture.asset(ImageManager.reload,width: 23,height: 23,),
+                  SvgPicture.asset(ImageManager.reload, width: 23.w, height: 23.h),
                   ],
               ),
             ],
