@@ -20,7 +20,7 @@ class UserProfileSection extends StatelessWidget {
       children: [
         // Top section with user profile and action icons
         Padding(
-          padding: EdgeInsets.all(20.w),
+          padding: EdgeInsets.all(10.w),
           child: Row(
             children: [
               // Avatar

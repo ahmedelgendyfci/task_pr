@@ -39,6 +39,7 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: ColorManager.background,
       body: SafeArea(
+        top: false,
         child: BlocConsumer<HomeCubit, HomeState>(
           listener: (context, state) {
             if (state is HomeError) {
@@ -71,7 +72,7 @@ class _HomePageState extends State<HomePage> {
                 color: ColorManager.primary,
                 backgroundColor: ColorManager.surface,
                 child: SingleChildScrollView(
-                  physics: const AlwaysScrollableScrollPhysics(),
+                  physics: const BouncingScrollPhysics(),
                   child: Column(
                     children: [
                       Column(
@@ -109,6 +110,7 @@ class _HomePageState extends State<HomePage> {
                                     ),
                                     child: Column(
                                       children: [
+                                        SizedBox(height: 50.h),
                                         UserProfileSection(
                                           userProfile:
                                               state.wellnessData.userProfile,
@@ -142,6 +144,9 @@ class _HomePageState extends State<HomePage> {
                         onSOSTriggered: (isTriggered) =>
                             context.read<HomeCubit>().triggerSOSAlert(isTriggered, context),
                       ),
+
+
+                      SizedBox(height: 30.h),
                     ],
                   ),
                 ),

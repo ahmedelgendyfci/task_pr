@@ -28,6 +28,7 @@ class _SOSButtonSectionState extends State<SOSButtonSection>{
       circleSlidingButtonSize: 45.w,
       leftEdgeSpacing: 3.w,
       rightEdgeSpacing: 3.w,
+      slideActionButtonType: SlideActionButtonType.slideActionWithLoaderButton,
       initialSlidingActionLabel: 'Slide For SOS',
       finalSlidingActionLabel: 'SOS',
       circleSlidingButtonIcon: Icon(Icons.sos, color: ColorManager.textOnDark),
