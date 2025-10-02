@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:slider_button/slider_button.dart';
+import 'package:sliding_action_button/sliding_action_button.dart';
 
 /// Widget that displays the SOS emergency button
 class SOSButtonSection extends StatefulWidget {
-  final VoidCallback onSOSTriggered;
+
+  final Function(bool) onSOSTriggered;
 
   const SOSButtonSection({
     super.key,
@@ -17,35 +18,28 @@ class SOSButtonSection extends StatefulWidget {
 class _SOSButtonSectionState extends State<SOSButtonSection>{
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 16.0),
-      child: SliderButton(
-        action: () async{
-      ///Do something here OnSlide
-      return false;
-          },
-          backgroundColor: Color(0xffF27373).withOpacity(0.5),
-          buttonColor: Color(0xffF27373),
-          width: MediaQuery.of(context).size.width ,
-          buttonSize: 55,
-          
-         label: Center(
-           child: Text(
-              "Slide For SOS",
-              style: TextStyle(
-                  color: Color(0xffF27373), fontWeight: FontWeight.w500, fontSize: 17),
-            ),
-         ),
-         height: 64,
-        icon: Text(
-          "SOS",
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.w400,
-            fontSize: 20,
-          ),
-        ),
-      ),
+
+    return CircleSlideToActionButton(
+      width: MediaQuery.of(context).size.width - 32,
+      parentBoxRadiusValue: 27,
+      circleSlidingButtonSize: 47,
+      leftEdgeSpacing: 3,
+      rightEdgeSpacing: 3,
+      initialSlidingActionLabel: 'Slide For SOS',
+      finalSlidingActionLabel: 'SOS',
+      circleSlidingButtonIcon: const Icon(Icons.sos, color: Colors.white),
+      parentBoxBackgroundColor: Color(0xffF27373).withOpacity(0.5),
+      parentBoxDisableBackgroundColor: Color(0xffF27373).withOpacity(0.5),
+      circleSlidingButtonBackgroundColor: Color(0xffF27373),
+      isEnable: true,
+      onSlideActionCompleted: () {
+        // print("Sliding action completed");
+        widget.onSOSTriggered(true);
+      },
+      onSlideActionCanceled: () {
+        // print("Sliding action cancelled");
+        widget.onSOSTriggered(false);
+      },
     );
   }
 }

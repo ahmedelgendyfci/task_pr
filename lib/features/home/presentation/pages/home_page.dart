@@ -62,32 +62,6 @@ class _HomePageState extends State<HomePage> {
               );
             }
 
-            if (state is HomeError) {
-              return Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(
-                      Icons.error_outline,
-                      color: Colors.red,
-                      size: 64,
-                    ),
-                    const SizedBox(height: 16),
-                    Text(
-                      'Error: ${state.message}',
-                      style: const TextStyle(color: Colors.black, fontSize: 16),
-                      textAlign: TextAlign.center,
-                    ),
-                    const SizedBox(height: 16),
-                    ElevatedButton(
-                      onPressed: () =>
-                          context.read<HomeCubit>().loadWellnessData(),
-                      child: const Text('Retry'),
-                    ),
-                  ],
-                ),
-              );
-            }
 
             if (state is HomeLoaded) {
               return RefreshIndicator(
@@ -172,8 +146,8 @@ class _HomePageState extends State<HomePage> {
 
                       // Red SOS Section
                       SOSButtonSection(
-                        onSOSTriggered: () =>
-                            context.read<HomeCubit>().triggerSOSAlert(),
+                        onSOSTriggered: (isTriggered) =>
+                            context.read<HomeCubit>().triggerSOSAlert(isTriggered, context),
                       ),
                     ],
                   ),

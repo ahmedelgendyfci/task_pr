@@ -20,10 +20,10 @@ class HomeRepositoryImpl implements HomeRepository {
   Future<Either<Failure, WellnessData>> getWellnessData() async {
     try {
       // Try to get from local cache first
-      final cachedData = await localDataSource.getCachedWellnessData();
-      if (cachedData != null) {
-        return Right(cachedData.toEntity());
-      }
+      // final cachedData = await localDataSource.getCachedWellnessData();
+      // if (cachedData != null) {
+      //   return Right(cachedData.toEntity());
+      // }
       
       // If no cached data, fetch from remote
       return await refreshWellnessData();
@@ -41,7 +41,7 @@ class HomeRepositoryImpl implements HomeRepository {
       final remoteData = await remoteDataSource.getWellnessData();
       
       // Cache the data locally
-      await localDataSource.cacheWellnessData(remoteData);
+      // await localDataSource.cacheWellnessData(remoteData);
       
       return Right(remoteData.toEntity());
     } on ServerException catch (e) {
@@ -72,7 +72,7 @@ class HomeRepositoryImpl implements HomeRepository {
     try {
       await for (final data in remoteDataSource.getWellnessDataStream()) {
         // Cache each update locally
-        await localDataSource.cacheWellnessData(data);
+        // await localDataSource.cacheWellnessData(data);
         yield Right(data.toEntity());
       }
     } on ServerException catch (e) {

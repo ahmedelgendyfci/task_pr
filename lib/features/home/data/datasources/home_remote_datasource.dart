@@ -85,14 +85,6 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   @override
   Future<WellnessDataModel> getWellnessData() async {
-    // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 800));
-    
-    // Simulate potential network error (5% chance)
-    if (DateTime.now().millisecond % 20 == 0) {
-      throw Exception('Network error occurred');
-    }
-    
     return WellnessDataModel(
       userProfile: _mockUserProfile,
       wellnessPercentage: 78.0,
@@ -104,15 +96,6 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
 
   @override
   Future<void> triggerSOS() async {
-    // Simulate network delay
-    await Future.delayed(const Duration(milliseconds: 500));
-    
-    // Simulate potential network error (10% chance)
-    if (DateTime.now().millisecond % 10 == 0) {
-      throw Exception('Failed to send SOS alert');
-    }
-    
-    // In a real app, this would send an emergency alert
     print('SOS Alert triggered successfully');
   }
 
@@ -126,7 +109,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
       final updatedVitals = _mockVitals.map((vital) {
         final randomVariation = (DateTime.now().millisecond % 10 - 5) * 0.1;
         return vital.copyWith(
-          value: (vital.value + randomVariation).clamp(0, double.infinity),
+          value: double.parse((vital.value + randomVariation).clamp(0, double.infinity).toStringAsFixed(2)),
           timestamp: DateTime.now(),
         );
       }).toList();

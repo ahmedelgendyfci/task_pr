@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:dartz/dartz.dart';
 import '../../domain/entities/wellness_data.dart';
@@ -52,13 +53,26 @@ class HomeCubit extends Cubit<HomeState> {
   }
 
   /// Trigger SOS emergency alert
-  Future<void> triggerSOSAlert() async {
-    final result = await triggerSOS();
-    
-    result.fold(
-      (failure) => emit(HomeError(message: failure.toString())),
-      (_) => emit(const HomeSOSTriggered(message: 'SOS Alert sent successfully')),
-    );
+  Future<void> triggerSOSAlert( bool isTriggered, BuildContext context) async {
+    if (isTriggered) {
+      print('SOS Alert sent successfully');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('SOS Alert sent successfully'),
+          backgroundColor: Colors.green,
+        ),
+      );
+      // emit(HomeSOSTriggered(message: 'SOS Alert sent successfully'));
+    } else {
+      print('SOS Alert cancelled');
+      ScaffoldMessenger.of(context).showSnackBar(
+        SnackBar(
+          content: Text('SOS Alert cancelled'),
+          backgroundColor: Colors.red,
+        ),
+      );
+      // emit(HomeSOSTriggered(message: 'SOS Alert cancelled'));
+    }
   }
 
   /// Start listening to real-time wellness data updates
